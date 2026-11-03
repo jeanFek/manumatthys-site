@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+.wrangler/
+
+# Not redistributed: commercial font and music. They stay in the working folder and are deployed from it.
+public/assets/fonts/
+public/assets/audio/

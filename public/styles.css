@@ -1,0 +1,519 @@
+/* Suisse Int'l, la police de lumi.eus : Medium pour le texte courant, Bold pour les titres */
+@font-face {
+    font-family: 'Suisse Intl';
+    src: url('assets/fonts/SuisseIntl-Medium.woff2') format('woff2');
+    font-weight: 100 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Suisse Intl';
+    src: url('assets/fonts/SuisseIntl-Bold.woff2') format('woff2');
+    font-weight: 700 900;
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: 'Suisse Intl', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+body.gated {
+    overflow: hidden;
+}
+
+/* Une seule langue visible à la fois */
+html:not([data-lang="en"]) [lang="en"],
+html:not([data-lang="eu"]) [lang="eu"] {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+a {
+    color: inherit;
+}
+
+/* ---------- Fond : glitch Sirena ---------- */
+
+#bg {
+    position: fixed;
+    inset: -15vh -15vw;  /* fond plus grand que l'écran : il peut bouger sans laisser de vide */
+    transform: translate(var(--bg-x, 0), var(--bg-y, 0));
+    z-index: 0;
+    background: black;
+    animation: photo-flash 0.1s steps(1) infinite;  /* durée d'un cycle normal -> négatif */
+}
+
+#bg video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Hydra : le canvas prend le relais de la vidéo (qui continue de tourner, c'est sa source) une fois sa première image prête */
+#bg canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+}
+
+#bg.hydra canvas {
+    visibility: visible;
+}
+
+#bg.hydra video {
+    opacity: 0;
+}
+
+body.gated #bg {
+    visibility: hidden;
+    animation: none;
+}
+
+@keyframes photo-flash {
+    0%   { filter: none; }
+    50%  { filter: invert(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #bg {
+        animation: none;
+    }
+}
+
+/* ---------- Barre du haut : play/stop, contact ---------- */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+    pointer-events: none;  /* seuls les boutons captent les clics */
+}
+
+.topbar > * {
+    pointer-events: auto;
+}
+
+body.past-hero .topbar {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 6px 10px;
+}
+
+.controls,
+#contact {
+    display: flex;
+    align-items: center;
+}
+
+#audioControl,
+#contact a {
+    display: block;
+    width: 76px;
+    height: 76px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+    background: transparent;
+    color: white;  /* avant le premier tick du cycle RGB */
+    cursor: pointer;
+}
+
+body.past-hero #audioControl,
+body.past-hero #contact a {
+    width: 48px;
+    height: 48px;
+    padding: 6px;
+}
+
+#audioControl svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+#contact svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+#contact svg .dot {
+    fill: currentColor;
+}
+
+#audioControl .icon-stop,
+#audioControl.playing .icon-play {
+    display: none;
+}
+
+#audioControl.playing .icon-stop {
+    display: block;
+}
+
+/* ---------- Accueil : le logo, en grand ---------- */
+
+.hero {
+    position: relative;
+    z-index: 1;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    height: var(--logo-h, 40svh);  /* scripts.js : le logo occupe 2,5 % de la surface de l'écran */
+    aspect-ratio: 466 / 750;
+    background-color: currentColor;  /* la couleur du cycle RGB */
+    color: white;
+    -webkit-mask: url('assets/images/logo.svg') no-repeat center / contain;
+    mask: url('assets/images/logo.svg') no-repeat center / contain;
+}
+
+.hero-foot {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 36px 16px 14px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9) 36px);  /* le menu reste lisible sur un fond blanc */
+}
+
+.hero-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 22px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+}
+
+.hero-nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.lang-switch {
+    display: flex;
+    gap: 4px;
+    color: white;
+}
+
+.lang-switch button {
+    font: inherit;
+    font-size: 12px;
+    color: inherit;
+    background: none;
+    border: 1px solid transparent;
+    padding: 2px 8px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+html[data-lang="en"] [data-set-lang="en"],
+html[data-lang="eu"] [data-set-lang="eu"] {
+    opacity: 1;
+    border-color: currentColor;
+}
+
+/* ---------- Rubriques ---------- */
+
+.content {
+    position: relative;
+    z-index: 2;
+    background: black;
+    padding-bottom: 14vh;
+}
+
+.block {
+    width: min(1040px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 12vh 0 0;
+    scroll-margin-top: 56px;
+}
+
+.block h2 {
+    margin: 0 0 1.4em;
+    font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.block h2 small {
+    font-weight: 400;
+    font-size: 0.55em;
+    opacity: 0.6;
+}
+
+.block h3 {
+    margin: 2.2em 0 0.9em;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+}
+
+.block h3 small {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.block p {
+    max-width: 680px;
+    margin: 0 0 1em;
+}
+
+.lead {
+    font-size: 1.05em;
+}
+
+/* Pochettes */
+
+.releases {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px 14px;
+}
+
+.releases a {
+    display: block;
+    text-decoration: none;
+}
+
+.releases img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: #111;
+}
+
+.releases a:hover img,
+.releases a:focus-visible img {
+    filter: invert(1);  /* clin d'œil au flash négatif du fond */
+}
+
+.releases .title,
+.releases .meta {
+    display: block;
+}
+
+.releases .title {
+    margin-top: 10px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.releases .meta {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.65;
+}
+
+/* Projets */
+
+.block h4.sub {
+    margin: 1.8em 0 0.8em;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+}
+
+.block h4.sub small {
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.project {
+    padding: 4px 0 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.project h3 {
+    margin-top: 1.4em;
+}
+
+.project a,
+.links a {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.project a:hover,
+.links a:hover {
+    border-bottom-color: white;
+}
+
+/* Vidéos Sirena_01 : deux cartes de même hauteur, la vidéo YouTube ne se charge qu'au clic */
+
+.videos {
+    display: grid;
+    grid-template-columns: 3.16fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+    align-items: start;
+}
+
+.videos figure {
+    margin: 0;
+}
+
+.videos figcaption {
+    margin-top: 6px;
+    font-size: 12px;
+    opacity: 0.65;
+}
+
+.yt {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: #000;
+    cursor: pointer;
+    overflow: hidden;
+    color: white;
+}
+
+.video-wide .yt {
+    aspect-ratio: 16 / 9;
+}
+
+.video-tall .yt {
+    aspect-ratio: 9 / 16;
+}
+
+.yt img,
+.yt iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+}
+
+.yt svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 22%;
+    max-width: 72px;
+    transform: translate(-50%, -50%);
+    fill: currentColor;
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+}
+
+.yt.loaded svg {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .releases {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .videos {
+        grid-template-columns: 1fr;
+    }
+
+    .video-tall {
+        width: 56%;
+    }
+}
+
+/* Contact */
+
+.links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.links li {
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- Avertissement (page d'entrée) ---------- */
+
+#warning {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    background: black;
+    text-align: center;
+    padding: 0 16px;
+}
+
+#warning-text {
+    margin: 0;
+    font-size: clamp(1.2em, 4vw, 2.2em);
+    animation: rgb-fade 6s linear infinite;
+}
+
+#enter {
+    font-family: inherit;
+    font-size: 1.2em;
+    padding: 0.6em 2em;
+    background: transparent;
+    border: 2px solid currentColor;
+    cursor: pointer;
+    animation: rgb-fade 7s linear infinite;  /* légèrement plus lent : jamais synchronisé avec le texte */
+}
+
+@keyframes rgb-fade {
+    0%, 100% { color: red; }
+    33.33%   { color: green; }
+    66.67%   { color: blue; }
+}

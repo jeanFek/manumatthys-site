@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthys</title>
+    <meta name="description" content="Manu Matthys — electronic music, LUMI, ODEI, Sirena_av. Discography, projects, contact.">
+    <link rel="preload" href="assets/fonts/SuisseIntl-Medium.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+
+    <!-- Android/Chrome favicons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon/android-chrome-512x512.png">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+</head>
+<body class="gated">
+    <div id="warning" role="dialog" aria-modal="true" aria-labelledby="warning-text">
+        <p id="warning-text">Warning: flashing lights</p>
+        <button id="enter" autofocus>Enter</button>
+    </div>
+    <noscript><style>#warning { display: none; }</style></noscript>
+
+    <!-- Fond : passages de glitch tirés de Sirena (ni logo ni installation), choisi horizontal ou vertical par scripts.js ; interactive.js y ajoute le canvas Hydra par-dessus -->
+    <div id="bg" aria-hidden="true">
+        <video id="bg-video" muted loop playsinline preload="none"
+               data-h="assets/video/glitch-h.mp4" data-v="assets/video/glitch-v.mp4"
+               data-poster-h="assets/images/glitch-poster-h.jpg" data-poster-v="assets/images/glitch-poster-v.jpg"></video>
+    </div>
+
+    <audio id="background-audio" autoplay loop muted>
+        <source src="assets/audio/background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <header class="topbar">
+        <div class="controls">
+            <button id="audioControl" class="rgb" aria-label="Play">
+                <svg class="icon-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1 L9 5 L2 9 Z"/></svg>
+                <svg class="icon-stop" viewBox="0 0 10 10" aria-hidden="true"><rect x="1.5" y="1.5" width="7" height="7"/></svg>
+            </button>
+        </div>
+        <div id="contact">
+            <a class="rgb" href="mailto:ni@manumatthys.com" target="_blank" aria-label="Email">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14"/><path d="M2 5 L12 13 L22 5"/></svg>
+            </a>
+            <a class="rgb" href="https://www.instagram.com/matthysmusic" target="_blank" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle class="dot" cx="17.3" cy="6.7" r="0.6"/></svg>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="top">
+            <h1 class="sr-only">Manu Matthys</h1>
+            <div id="logo" class="rgb" role="img" aria-label="Matthys"></div>
+            <div class="hero-foot">
+                <nav class="hero-nav" aria-label="Menu">
+                    <a class="rgb" href="#disko"><span lang="en">discography</span><span lang="eu">diskografia</span></a>
+                    <a class="rgb" href="#proiektuak"><span lang="en">projects</span><span lang="eu">proiektuak</span></a>
+                    <a class="rgb" href="#harremana"><span lang="en">contact</span><span lang="eu">harremana</span></a>
+                </nav>
+                <div class="lang-switch rgb" role="group" aria-label="Language / Hizkuntza">
+                    <button type="button" data-set-lang="en">EN</button>
+                    <button type="button" data-set-lang="eu">EUS</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="content">
+            <section id="disko" class="block">
+                <h2><span lang="en">Discography</span><span lang="eu">Diskografia</span></h2>
+
+                <h3>LUMI</h3>
+                <ul class="releases">
+                    <li><a href="https://lumimusika.bandcamp.com/album/bezperen-dirdira" target="_blank" rel="noopener"><img src="assets/covers/bezperen-dirdira.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">Bezperen Dirdira</span><span class="meta">2022 · Usopop Diskak</span></a></li>
+                    <li><a href="https://moimoicollectif.bandcamp.com/album/itzal-zikinak" target="_blank" rel="noopener"><img src="assets/covers/itzal-zikinak.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">Itzal Zikinak</span><span class="meta">2019 · Moï Moï Records</span></a></li>
+                    <li><a href="https://moimoicollectif.bandcamp.com/album/premier-ep-lumi" target="_blank" rel="noopener"><img src="assets/covers/lumi-ep.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">EP</span><span class="meta">2015 · Moï Moï Records</span></a></li>
+                </ul>
+
+                <h3>ODEI</h3>
+                <ul class="releases">
+                    <li><a href="https://moimoicollectif.bandcamp.com/album/odei-andde" target="_blank" rel="noopener"><img src="assets/covers/odei-andde.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">Andde</span><span class="meta">2019 · Moï Moï Records</span></a></li>
+                    <li><a href="https://moimoicollectif.bandcamp.com/album/odei-bat" target="_blank" rel="noopener"><img src="assets/covers/odei-bat.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">Bat</span><span class="meta">2014 · Moï Moï Records</span></a></li>
+                </ul>
+
+                <h3>MATTHYS</h3>
+                <ul class="releases">
+                    <li><a href="https://open.spotify.com/album/2N1xsNTCtrIJGm7IJM0R2s" target="_blank" rel="noopener"><img src="assets/covers/happy-blackmail.jpg" alt="" width="400" height="400" loading="lazy"><span class="title">Happy Blackmail</span><span class="meta">2010 · Cinematique</span></a></li>
+                </ul>
+
+                <h3><span lang="en">Collaborations</span><span lang="eu">Lankidetzak</span></h3>
+                <ul class="releases">
+                    <li><a href="https://www.film-documentaire.fr/4DACTION/w_fiche_film/29004_0" target="_blank" rel="noopener"><img src="assets/covers/hiru-uhinak.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">Hiru Uhinak</span><span class="meta">2019 · <span lang="en">original music — film by Loïc Legrand</span><span lang="eu">jatorrizko musika — Loïc Legranden filma</span></span></a></li>
+                    <li><a href="https://lumierenoirerecords.bandcamp.com/album/lumi-re-noire-presents-from-above-vol-i" target="_blank" rel="noopener"><img src="assets/covers/from-above.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">From Above Vol. I</span><span class="meta">2018 · Lumière Noire Records · LUMI: Izerditan</span></a></li>
+                    <li><a href="https://souterraine.bandcamp.com/track/dena-lo" target="_blank" rel="noopener"><img src="assets/covers/la-souterraine.jpg" alt="" width="640" height="640" loading="lazy"><span class="title">La Souterraine en Nouvelle-Aquitaine</span><span class="meta">2018 · La Souterraine · LUMI: Dena Lo</span></a></li>
+                </ul>
+            </section>
+
+            <section id="proiektuak" class="block">
+                <h2><span lang="en">Projects</span><span lang="eu">Proiektuak</span></h2>
+
+                <article class="project">
+                    <h3>LUMI <small>2014 →</small></h3>
+                    <p lang="en">Electronic duo with Nahia Zubeldia. Songs written in Basque by Nahia, composed by both. Three records, a tour of Japan in 2018 (Tokyo, Kyoto, Osaka, Hiroshima, Kobe, Matsumoto) and the Teatro Mayor in Bogotá in 2022.</p>
+                    <p lang="eu">Nahia Zubeldiarekin osatzen duen musika elektronikoko bikotea. Kantuak Nahiak idazten ditu euskaraz, eta biek elkarrekin konposatzen. Hiru disko, Japoniako bira 2018an (Tokio, Kioto, Osaka, Hiroshima, Kobe, Matsumoto) eta Bogotako Teatro Mayor 2022an.</p>
+                    <p><a href="https://lumi.eus" target="_blank" rel="noopener">lumi.eus</a></p>
+                </article>
+
+                <article class="project">
+                    <h3>ODEI <small>2009 – 2020</small></h3>
+                    <p lang="en">Improvised music for instruments and synthesizers, with Arnaud Biscay (drums) and Maxime Hoarau (vibraphone). With Jose Etcheveste, the trio developed an interaction system that generates MIDI notes for the synths live, from what the two instrumentalists play.</p>
+                    <p lang="eu">Instrumentu eta sintetizadoreentzako musika inprobisatua, Arnaud Biscay (bateria) eta Maxime Hoarau (bibrafonoa) lagun. Jose Etchevesterekin batera, hirukoteak elkarreragin-sistema bat garatu zuen: bi instrumentistek jotzen dutenaren arabera, sintetizadoreentzako MIDI notak sortzen ditu zuzenean.</p>
+                </article>
+
+                <article class="project">
+                    <h3>MATTHYS <small>2006 →</small></h3>
+                    <p lang="en">Solo project: tracks released on several European labels and concerts across Europe. Since 2021, a video and audio-reactive dimension has joined the making of sound.</p>
+                    <p lang="eu">Bakarkako proiektua: Europako hainbat diskoetxetan argitaratutako kantuak eta Europako toki askotan emanaldiak. 2021etik, bideoa eta audio-erreaktibitatea gehitu zaizkio soinuaren ekoizpenari.</p>
+                </article>
+
+                <article class="project">
+                    <h3>SIRENA_AV</h3>
+                    <p lang="en">Audiovisual duo with Franz Vulder Allain: immersive installations and live, generative, audio-reactive performances.</p>
+                    <p lang="eu">Franz Vulder Allainekin osatzen duen bikote audiobisuala: murgiltze-instalazioak eta zuzeneko performantza sortzaile eta audio-erreaktiboak.</p>
+                    <p><a href="https://sirena-av.com" target="_blank" rel="noopener">sirena-av.com</a></p>
+                    <h4 class="sub">sirena_01 <small><span lang="en">installation</span><span lang="eu">instalazioa</span></small></h4>
+                    <p class="lead" lang="en">Immersive audiovisual installation with Franz Vulder Allain: an oblong, shimmering micro-architecture where our presence awakens a dormant audiovisual microcosm.</p>
+                    <p class="lead" lang="eu">Franz Vulder Allainekin egindako murgiltze-instalazio audiobisuala: mikro-arkitektura luzanga eta dirdiratsu bat, non gure presentziak lo dagoen mikrokosmos audiobisuala iratzartzen duen.</p>
+                    <div class="videos">
+                        <figure class="video-wide">
+                            <button type="button" class="yt" data-id="JckDeDURANE" aria-label="Play: sirena_01 — Udada 2026">
+                                <img src="assets/images/sirena01-udada.jpg" alt="" loading="lazy">
+                                <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1 L9 5 L2 9 Z"/></svg>
+                            </button>
+                            <figcaption><span lang="en">prototype — Udada festival 2026</span><span lang="eu">prototipoa — Udada festibala 2026</span></figcaption>
+                        </figure>
+                        <figure class="video-tall">
+                            <button type="button" class="yt" data-id="cKnhpH0ts28" aria-label="Play: sirena_01 — one shot">
+                                <img src="assets/images/sirena01-oneshot.jpg" alt="" loading="lazy">
+                                <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1 L9 5 L2 9 Z"/></svg>
+                            </button>
+                            <figcaption>one shot</figcaption>
+                        </figure>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <h3><span lang="en">Teaching &amp; collective</span><span lang="eu">Irakaskuntza eta kolektiboa</span></h3>
+                    <p lang="en">Since 2016, computer-assisted music teacher at ATABAL, Biarritz's contemporary music centre. 2014 – 2017: BOOM TCHACK, music-making workshops with computers for children and teenagers, in schools and at festivals. Founding member of Collectif Moï Moï, the cultural association behind the Baleapop festival in Saint-Jean-de-Luz.</p>
+                    <p lang="eu">2016tik, Miarritzeko ATABAL egungo musiken zentroan ordenagailu bidezko musika irakasle. 2014 – 2017: BOOM TCHACK, haur eta nerabeentzako musika sorkuntza tailerrak ordenagailuz, eskoletan eta jaialdietan. Moï Moï kolektiboaren kide sortzailea: Donibane Lohizuneko Baleapop jaialdia antolatzen duen elkarte kulturala.</p>
+                </article>
+            </section>
+
+            <section id="harremana" class="block">
+                <h2><span lang="en">Contact</span><span lang="eu">Harremana</span></h2>
+                <ul class="links">
+                    <li><a href="mailto:ni@manumatthys.com">ni@manumatthys.com</a></li>
+                    <li><a href="https://www.instagram.com/matthysmusic" target="_blank" rel="noopener">instagram</a></li>
+                    <li><a href="https://lumi.eus" target="_blank" rel="noopener">lumi.eus</a> · <a href="https://sirena-av.com" target="_blank" rel="noopener">sirena-av.com</a></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script src="interactive.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
